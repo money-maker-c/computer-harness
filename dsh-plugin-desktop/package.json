@@ -1,7 +1,7 @@
 {
   "name": "dsh-plugin-desktop",
   "version": "2.0.2",
-  "description": "DSH Desktop: an Electron shell composed as a DeepSeek Harness Cordis plugin",
+  "description": "Computer Harness Desktop: an Electron shell composed as a DeepSeek Harness Cordis plugin",
   "license": "MIT",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -285,7 +285,7 @@
   },
   "build": {
     "appId": "ai.deepseek.dsh.desktop",
-    "productName": "DSH Desktop",
+    "productName": "Computer Harness Desktop",
     "asar": true,
     "asarUnpack": [
       "package.json",
@@ -346,7 +346,7 @@
           ]
         }
       ],
-      "artifactName": "DSH-Desktop-${version}-${arch}-Portable.${ext}",
+      "artifactName": "Computer-Harness-${version}-${arch}-Portable.${ext}",
       "icon": "build/app-icon.png"
     },
     "nsis": {
@@ -358,9 +358,9 @@
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "differentialPackage": false,
-      "shortcutName": "DSH Desktop",
+      "shortcutName": "Computer Harness Desktop",
       "useZip": false,
-      "artifactName": "DSH-Desktop-${version}-${arch}-Setup.${ext}"
+      "artifactName": "Computer-Harness-${version}-${arch}-Setup.${ext}"
     },
     "linux": {
       "target": [

@@ -1,4 +1,4 @@
-/** DSH Desktop executable: minimal Electron bootstrap around the Host Cordis root. */
+/** Computer Harness Desktop executable: minimal Electron bootstrap around the Host Cordis root. */
 
 import { app, crashReporter, dialog } from 'electron'
 import { randomUUID } from 'node:crypto'
@@ -103,7 +103,7 @@ import type { RendererBootReport } from './renderer-boot-contract.ts'
 import { desktopLocaleFromLanguageTag } from './tray-locale.ts'
 
 const BIN_NAME = 'dsh-plugin-desktop'
-const PRODUCT_NAME = 'DSH Desktop'
+const PRODUCT_NAME = 'Computer Harness Desktop'
 
 class RendererStartupFailure extends Error {
   constructor(
@@ -147,14 +147,14 @@ async function showInstallRollbackNotice(
   const copy = locale === 'zh'
     ? {
         title: '插件安装已回滚',
-        message: `DSH Desktop 已恢复安装 ${transaction.packageName} 前的配置。`,
-        detail: '上一次启动未能通过健康验证。DSH Desktop 已在本地保存诊断信息，并恢复 package.json、pnpm-lock.yaml 和 pnpm-workspace.yaml；诊断信息不会自动上传。',
+        message: `Computer Harness Desktop 已恢复安装 ${transaction.packageName} 前的配置。`,
+        detail: '上一次启动未能通过健康验证。Computer Harness Desktop 已在本地保存诊断信息，并恢复 package.json、pnpm-lock.yaml 和 pnpm-workspace.yaml；诊断信息不会自动上传。',
         confirm: '知道了',
       }
     : {
         title: 'Plugin installation rolled back',
-        message: `DSH Desktop restored the configuration from before ${transaction.packageName} was installed.`,
-        detail: 'The previous startup did not pass its health check. DSH Desktop saved diagnostics locally and restored package.json, pnpm-lock.yaml, and pnpm-workspace.yaml. Diagnostics are not uploaded automatically.',
+        message: `Computer Harness Desktop restored the configuration from before ${transaction.packageName} was installed.`,
+        detail: 'The previous startup did not pass its health check. Computer Harness Desktop saved diagnostics locally and restored package.json, pnpm-lock.yaml, and pnpm-workspace.yaml. Diagnostics are not uploaded automatically.',
         confirm: 'OK',
       }
   try {
@@ -184,14 +184,14 @@ async function showProfileCheckpointRestoreNotice(
   const copy = locale === 'zh'
     ? {
         title: '已恢复最近一次可用配置',
-        message: `DSH Desktop 已恢复最近一次成功启动的配置「${profileName}」。`,
-        detail: '诊断信息已尽可能保存在本地；如果恢复涉及依赖声明，插件依赖也已按锁文件重新同步。DSH Desktop 现在将重新启动。',
+        message: `Computer Harness Desktop 已恢复最近一次成功启动的配置「${profileName}」。`,
+        detail: '诊断信息已尽可能保存在本地；如果恢复涉及依赖声明，插件依赖也已按锁文件重新同步。Computer Harness Desktop 现在将重新启动。',
         confirm: '重新启动',
       }
     : {
         title: 'Last healthy configuration restored',
-        message: `DSH Desktop restored Profile “${profileName}” from the last successful startup.`,
-        detail: 'Diagnostics were saved locally when possible. When dependency declarations were restored, plugin dependencies were synchronized from the lockfile. DSH Desktop will now restart.',
+        message: `Computer Harness Desktop restored Profile “${profileName}” from the last successful startup.`,
+        detail: 'Diagnostics were saved locally when possible. When dependency declarations were restored, plugin dependencies were synchronized from the lockfile. Computer Harness Desktop will now restart.',
         confirm: 'Restart',
       }
   try {

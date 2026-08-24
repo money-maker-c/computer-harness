@@ -1,4 +1,4 @@
-/** DSH Desktop Host plugin: owns the selected native shell generation. */
+/** Computer Harness Desktop Host plugin: owns the selected native shell generation. */
 
 import { fileURLToPath } from 'node:url'
 import type { Context } from '@deepseek-ai/cordis'
@@ -137,8 +137,8 @@ export function apply(ctx: Context, config: Config): void {
   const runtime = ctx.get('desktopRuntime')
   if (runtime === undefined) {
     process.stderr.write(
-      'dsh-plugin-desktop: this profile is composed with the DSH Desktop shell, which requires the desktop launcher (desktopRuntime).\n'
-      + 'Start it with `dsh-desktop`, or select this profile inside the packaged DSH Desktop application.\n'
+      'dsh-plugin-desktop: this profile is composed with the Computer Harness Desktop shell, which requires the desktop launcher (desktopRuntime).\n'
+      + 'Start it with `dsh-desktop`, or select this profile inside the packaged Computer Harness Desktop application.\n'
       + 'The desktop terminal, profile, and update rows stay inactive in an ordinary DSH boot.\n',
     )
     return
@@ -291,8 +291,8 @@ export function apply(ctx: Context, config: Config): void {
     () => runtime.schedule({
       ...config,
       url: desktopRendererUrl(ctx.webServer.port, config.mode, runtime.platform),
-      productName: 'DSH Desktop',
-      windowTitle: 'DeepSeek Harness Desktop',
+      productName: 'Computer Harness Desktop',
+      windowTitle: 'Computer Harness Desktop',
       iconPath,
       trayIcons,
       readLocalePreference: () => {
