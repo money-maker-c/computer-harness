@@ -5,6 +5,8 @@ on:
     branches: [master]
   push:
     branches: [master]
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 permissions:
@@ -120,6 +122,11 @@ jobs:
         env:
           DSH_PACKAGE_CHECK_ALREADY_RAN: '1'
         run: yarn workspace dsh-plugin-desktop dist:win-portable
+      - uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: windows-artifacts
+          path: dsh-plugin-desktop/dist/*.{exe,zip}
 
   # macOS-only universal packaging smoke on a real macOS runner: the signed
   # release is built manually on a credentialed machine, so an unsigned DMG
@@ -152,6 +159,11 @@ jobs:
         env:
           DSH_PACKAGE_CHECK_ALREADY_RAN: '1'
         run: yarn workspace dsh-plugin-desktop dist:mac-smoke
+      - uses: actions/upload-artifact@v4
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: macos-artifacts
+          path: dsh-plugin-desktop/dist/mac-smoke/*.dmg
 
   # Upstream toolchain smoke: the portable-shell scripts must resolve the
   # pinned submodule's own Yarn/pnpm release on Windows.
@@ -170,3 +182,25 @@ jobs:
       - run: corepack enable
       - run: yarn check:layout
       - run: yarn upstream:version
+
+  # Publish a GitHub Release with platform installers when a version tag is pushed.
+  # The build jobs upload their artifacts only on tag pushes; this job collects
+  # them and creates the release entry.
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [desktop-windows, desktop-macos]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          path: release-assets
+      - name: List release assets
+        run: ls -lh release-assets/
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: release-assets/*
