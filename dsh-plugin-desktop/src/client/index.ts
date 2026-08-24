@@ -69,6 +69,22 @@ export function apply(ctx: ClientContext): void {
   const environment = parseDesktopClientEnvironment(window.location.search)
   if (!environment) return
   applyDesktopSettings(ctx, environment)
+
+  // Override the upstream DeepSeek SVG brand wordmark with plain text.
+  // Applies in both compatibility and advanced modes.
+  ctx.effect(() => {
+    const style = document.createElement('style')
+    style.dataset.plugin = 'dsh-plugin-desktop'
+    style.dataset.pluginCss = 'dsh-plugin-desktop/brand-override'
+    style.textContent = [
+      '[data-slot="sidebar.brand.name"] > svg,',
+      '[data-slot="sidebar.brand.name"] > * { display: none !important; }',
+      '[data-slot="sidebar.brand.name"]::after { content: "Computer Harness"; font-size: 17px; font-weight: 600; letter-spacing: 0; white-space: nowrap; }',
+    ].join('\n')
+    document.head.appendChild(style)
+    return () => { style.remove() }
+  }, 'dsh-plugin-desktop: brand name override')
+
   ctx.effect(
     () => startRendererBootReporter(ctx.loader),
     'dsh-plugin-desktop: renderer boot health report',
