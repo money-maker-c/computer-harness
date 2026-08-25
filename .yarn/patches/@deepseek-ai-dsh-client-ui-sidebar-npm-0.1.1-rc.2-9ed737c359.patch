@@ -1,0 +1,13 @@
+diff --git a/lib/client.js b/lib/client.js
+index b75d41b7619e06b941457329e7a2a17331429206..21faff12e8ae6dde39f9a266e65099339fd4249e 100644
+--- a/lib/client.js
++++ b/lib/client.js
+@@ -172,7 +172,7 @@ window.__ModuleLoader__.load({
+ 									className: SidebarRoot_module_css_default.brandName,
+ 									children: renderSlot("sidebar.brand.name", {}, { fallback: (0, react_jsx_runtime.jsxs)(react_jsx_runtime.Fragment, { children: [(0, react_jsx_runtime.jsx)("span", {
+ 										className: SidebarRoot_module_css_default.fallbackBrandName,
+-										children: "DSH Local Build"
++										children: "Computer Harness"
+ 									}), (0, react_jsx_runtime.jsx)("span", {
+ 										className: SidebarRoot_module_css_default.buildRevision,
+ 										children: "29b22c5"
